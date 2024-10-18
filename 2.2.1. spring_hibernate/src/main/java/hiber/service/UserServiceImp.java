@@ -10,9 +10,17 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
+   private final UserDao userDao;
 
    @Autowired
-   private UserDao userDao;
+   public UserServiceImp(UserDao userDao) {
+      this.userDao = userDao;
+   }
+//   Причины по которым лучше вводить зависимость в конструкторе:
+//   1. Явность заивисимости
+//   2. Иммутабельность
+//   3. Легче использовать модульные тесты. Не нужны доп. библиотеки
+//   4. Spring автоматически выявляет циклические зависимости если они объявлены в конструкторе (меньше всего понял этот пункт)
 
    @Transactional
    @Override
