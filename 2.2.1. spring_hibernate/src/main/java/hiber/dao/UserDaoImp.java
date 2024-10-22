@@ -32,11 +32,11 @@ public class UserDaoImp implements UserDao {
    @Override
    public User getUserFromCarParameters(String model, int series) {
       String hql = "SELECT u FROM User u LEFT JOIN FETCH u.car where u.car.model = :model and u.car.series = :series";
-      return sessionFactory.getCurrentSession().createQuery(hql, Car.class)
+      return sessionFactory.getCurrentSession().createQuery(hql, User.class)
               .setParameter("model", model)
               .setParameter("series", series)
-              .uniqueResult()
-              .getUser();
+              .uniqueResult();
+//      Ну даже в таком накосячил... Конечно тип выборки должен быть User, а не Car...
    }
 
 }
